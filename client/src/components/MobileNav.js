@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { Drawer, List, IconButton, Box } from "@mui/material";
-import { Close, Settings, ArrowBack } from "@mui/icons-material";
-import NavItem from "./NavItem"; // Import the NavItem component
+import { Settings, ArrowBack } from "@mui/icons-material";
+import NavItem from "./NavItem";
 
 const MobileNav = ({ open, onClose, items, moveItem, handleEdit }) => {
   return (

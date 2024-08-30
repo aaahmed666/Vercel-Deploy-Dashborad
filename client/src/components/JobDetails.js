@@ -14,50 +14,48 @@ const JobDetails = () => {
           marginBottom: 2,
         }}
       >
-        <Grid
-          container
-          spacing={2}
+        <Box
+          display="flex"
+          flexDirection="column"
+          gap={2}
         >
-          <Grid
-            item
-            xs={12}
-            md={6}
-          >
-            <Typography
-              variant="h6"
-              component="div"
-            >
-              UI Designer in Egypt
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-            >
-              70 job positions
-            </Typography>
-          </Grid>
-
-          <Grid
-            item
-            xs={12}
-            md={6}
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
           >
             <Box
               display="flex"
               alignItems="center"
-              justifyContent="flex-end"
               gap={1}
             >
-              <Typography
-                variant="body1"
-                component="div"
-              >
-                Set Alert
-              </Typography>
+              <Favorite sx={{ fontSize: 40, color: "#4caf50" }} />
+              <Box>
+                <Typography
+                  variant="h6"
+                  component="div"
+                >
+                  UI Designer in Egypt
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                >
+                  70 job positions
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box
+              display="flex"
+              alignItems="center"
+              gap={1}
+            >
+              <Typography variant="body1">Set Alert</Typography>
               <Switch color="success" />
             </Box>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Card>
 
       <Card
@@ -70,138 +68,127 @@ const JobDetails = () => {
         <Grid
           container
           spacing={2}
+          direction="column"
         >
-          <Grid
-            item
-            xs={12}
-            md={6}
-          >
+          <Grid item>
             <Box
               display="flex"
               alignItems="center"
-              gap={1}
+              justifyContent="space-between"
             >
-              <Favorite sx={{ fontSize: 40, color: "#4caf50" }} />
-              <Box>
-                <Typography variant="h6">Gaming UI Designer</Typography>
-                <Typography variant="body2">Rock Star Games</Typography>
+              <Box
+                display="flex"
+                alignItems="center"
+                gap={1}
+              >
+                <Favorite color="action" />
+                <Box>
+                  <Typography variant="h6">Gaming UI Designer</Typography>
+                  <Typography variant="body2">Rock Star Games</Typography>
+                </Box>
               </Box>
+              <IconButton
+                sx={{
+                  borderRadius: "50%",
+                  border: "2px solid #4caf50",
+                }}
+              >
+                <Favorite sx={{ color: "#4caf50" }} />
+              </IconButton>
             </Box>
 
             <Box
               display="flex"
-              alignItems="center"
-              gap={1}
-              mt={1}
+              flexDirection="row"
+              mt={2}
+              gap={2}
             >
-              <LocationOn color="action" />
-              <Typography
-                variant="body2"
-                color="textSecondary"
+              <Box
+                display="flex"
+                alignItems="center"
+                gap={1}
               >
-                Mansoura
-              </Typography>
-            </Box>
+                <LocationOn color="action" />
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                >
+                  Mansoura
+                </Typography>
+              </Box>
 
-            <Box
-              display="flex"
-              alignItems="center"
-              gap={1}
-              mt={1}
-            >
-              <DateRange color="action" />
-              <Typography
-                variant="body2"
-                color="textSecondary"
+              <Box
+                display="flex"
+                alignItems="center"
+                gap={1}
               >
-                10 days ago
-              </Typography>
+                <DateRange color="action" />
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                >
+                  10 days ago
+                </Typography>
+              </Box>
             </Box>
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            md={6}
-          >
+          <Grid item>
             <Box
               display="flex"
               flexDirection="column"
-              alignItems="center"
-              gap={1}
+              alignItems="flex-start"
+              gap={2}
             >
               <Box
-                sx={{
-                  backgroundColor: "#ffffff",
-                  borderRadius: "50%",
-                  border: "2px solid #4caf50",
-                  padding: 2,
-                }}
+                display="flex"
+                flexWrap="wrap"
+                gap={2}
               >
-                <IconButton>
-                  <Favorite color="success" />
-                </IconButton>
-              </Box>
+                <Card
+                  sx={{
+                    backgroundColor: "#ffffff",
+                    border: "1px solid #4caf50",
+                    padding: 1,
+                    textAlign: "center",
+                    minWidth: "fit-content",
+                    flexShrink: 0,
+                    flexGrow: 1,
+                  }}
+                >
+                  <Typography variant="body2">
+                    0 - 3 years experience
+                  </Typography>
+                </Card>
 
-              <Typography
-                variant="h6"
-                mt={2}
-              >
-                Job Preferences
-              </Typography>
-              <Grid
-                container
-                spacing={1}
-                mt={1}
-              >
-                <Grid
-                  item
-                  xs={12}
-                  sm={4}
+                <Card
+                  sx={{
+                    backgroundColor: "#ffffff",
+                    border: "1px solid #4caf50",
+                    padding: 1,
+                    textAlign: "center",
+                    minWidth: "fit-content",
+                    flexShrink: 0,
+                    flexGrow: 1,
+                  }}
                 >
-                  <Card
-                    sx={{
-                      backgroundColor: "#ffffff",
-                      border: "1px solid #4caf50",
-                      padding: 1,
-                    }}
-                  >
-                    <Typography variant="body2">
-                      0 - 3 years experience
-                    </Typography>
-                  </Card>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={4}
+                  <Typography variant="body2">Full Time</Typography>
+                </Card>
+
+                <Card
+                  sx={{
+                    backgroundColor: "#ffffff",
+                    border: "1px solid #4caf50",
+                    padding: 1,
+                    textAlign: "center",
+                    minWidth: "fit-content",
+                    flexShrink: 0,
+                    flexGrow: 1,
+                  }}
                 >
-                  <Card
-                    sx={{
-                      backgroundColor: "#ffffff",
-                      border: "1px solid #4caf50",
-                      padding: 1,
-                    }}
-                  >
-                    <Typography variant="body2">Full Time</Typography>
-                  </Card>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={4}
-                >
-                  <Card
-                    sx={{
-                      backgroundColor: "#ffffff",
-                      border: "1px solid #4caf50",
-                      padding: 1,
-                    }}
-                  >
-                    <Typography variant="body2">Remote</Typography>
-                  </Card>
-                </Grid>
-              </Grid>
+                  <Typography variant="body2">Remote</Typography>
+                </Card>
+              </Box>
             </Box>
           </Grid>
         </Grid>
@@ -210,12 +197,6 @@ const JobDetails = () => {
           sx={{
             borderTop: "1px solid #4caf50",
             marginTop: 2,
-            paddingTop: 2,
-          }}
-        />
-
-        <Box
-          sx={{
             paddingTop: 2,
           }}
         >

@@ -14,6 +14,7 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import JobDetails from "../components/JobDetails";
 import Header from "./Header";
+import { fetchNavItems, trackReorder, saveNavItems } from "../utils/api";
 
 const HomePage = () => {
   const [navItems, setNavItems] = useState([]);
@@ -21,9 +22,8 @@ const HomePage = () => {
   const isMobile = useMediaQuery("(max-width:768px)");
 
   useEffect(() => {
-    fetch("https://vercel-deploy-server-azure.vercel.app/nav")
-      .then((res) => res.json())
-      .then((data) => setNavItems(data))
+    fetchNavItems()
+      .then(setNavItems)
       .catch((error) =>
         console.error("Error fetching navigation data:", error)
       );
@@ -35,11 +35,7 @@ const HomePage = () => {
     updatedItems.splice(toIndex, 0, movedItem);
     setNavItems(updatedItems);
 
-    fetch("https://vercel-deploy-server-azure.vercel.app/track", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: movedItem.id, from: fromIndex, to: toIndex }),
-    }).catch((error) =>
+    trackReorder(movedItem.id, fromIndex, toIndex).catch((error) =>
       console.error("Error tracking navigation reorder:", error)
     );
   };
@@ -49,11 +45,9 @@ const HomePage = () => {
     updatedItems[index] = updatedItem;
     setNavItems(updatedItems);
 
-    fetch("https://vercel-deploy-server-azure.vercel.app/nav", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedItems),
-    }).catch((error) => console.error("Error saving navigation data:", error));
+    saveNavItems(updatedItems).catch((error) =>
+      console.error("Error saving navigation data:", error)
+    );
   };
 
   return (
