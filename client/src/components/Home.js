@@ -21,7 +21,7 @@ const HomePage = () => {
   const isMobile = useMediaQuery("(max-width:768px)");
 
   useEffect(() => {
-    fetch("http://localhost:8081/nav")
+    fetch("https://vercel-deploy-server-azure.vercel.app/nav")
       .then((res) => res.json())
       .then((data) => setNavItems(data))
       .catch((error) =>
@@ -35,7 +35,7 @@ const HomePage = () => {
     updatedItems.splice(toIndex, 0, movedItem);
     setNavItems(updatedItems);
 
-    fetch("http://localhost:8081/track", {
+    fetch("https://vercel-deploy-server-azure.vercel.app/track", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: movedItem.id, from: fromIndex, to: toIndex }),
@@ -49,7 +49,7 @@ const HomePage = () => {
     updatedItems[index] = updatedItem;
     setNavItems(updatedItems);
 
-    fetch("http://localhost:8081/nav", {
+    fetch("https://vercel-deploy-server-azure.vercel.app/nav", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedItems),
