@@ -20,7 +20,7 @@ import { fetchNavItems, trackReorder, saveNavItems } from "../utils/api";
 const HomePage = () => {
   const [navItems, setNavItems] = useState([]);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(false); // State for edit mode
+  const [isEditing, setIsEditing] = useState(false);
   const isMobile = useMediaQuery("(max-width:768px)");
 
   useEffect(() => {
@@ -37,23 +37,32 @@ const HomePage = () => {
     updatedItems.splice(toIndex, 0, movedItem);
     setNavItems(updatedItems);
 
+    // Track the reorder
     trackReorder(movedItem.id, fromIndex, toIndex).catch((error) =>
       console.error("Error tracking navigation reorder:", error)
     );
   };
 
-  const handleEdit = (updatedItem, index) => {
-    const updatedItems = [...navItems];
-    updatedItems[index] = updatedItem;
+  const handleEdit = (updatedItem, itemId) => {
+    const updateNavItems = (items) => {
+      return items?.map((item) =>
+        item.id === itemId
+          ? updatedItem
+          : { ...item, children: updateNavItems(item.children) }
+      );
+    };
+
+    const updatedItems = updateNavItems(navItems);
     setNavItems(updatedItems);
 
+    // Save the updated items
     saveNavItems(updatedItems).catch((error) =>
       console.error("Error saving navigation data:", error)
     );
   };
 
   const handleToggleEditMode = () => {
-    setIsEditing(!isEditing); // Toggle edit mode
+    setIsEditing(!isEditing);
   };
 
   return (
@@ -100,25 +109,24 @@ const HomePage = () => {
             </Box>
           )}
 
-          {!isMobile && (
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="flex-end"
-              padding="10px"
-              sx={{
-                backgroundColor: "white",
-                boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-              }}
+          {/* Settings Section */}
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="flex-end"
+            padding="10px"
+            sx={{
+              backgroundColor: "white",
+              boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+            }}
+          >
+            <IconButton
+              onClick={handleToggleEditMode}
+              sx={{ color: "black" }}
             >
-              <IconButton
-                onClick={handleToggleEditMode}
-                sx={{ color: "black" }}
-              >
-                <SettingsIcon />
-              </IconButton>
-            </Box>
-          )}
+              <SettingsIcon />
+            </IconButton>
+          </Box>
 
           <Box
             display="flex"

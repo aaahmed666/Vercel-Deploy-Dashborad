@@ -44,10 +44,11 @@ const NavItem = ({ item, index, moveItem, handleEdit, isEditing, level }) => {
   drag(drop(ref));
 
   useEffect(() => {
+    setLocalItem(item); // Update localItem when item changes
     if (!isEditing) {
       setOpen(false);
     }
-  }, [isEditing]);
+  }, [item, isEditing]);
 
   const hasChildren = item?.children && item?.children?.length > 0;
 
@@ -57,16 +58,16 @@ const NavItem = ({ item, index, moveItem, handleEdit, isEditing, level }) => {
   };
 
   const handleToggleVisibility = (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); // Prevents event bubbling
     const updatedItem = { ...localItem, visible: !localItem.visible };
     setLocalItem(updatedItem);
-    handleEdit(updatedItem, index);
+    handleEdit(updatedItem, item.id); // Use item.id for updates
   };
 
   const handleEditToggle = (e) => {
-    e.stopPropagation();
+    e.stopPropagation(); // Prevents event bubbling
     if (isItemEditing) {
-      handleEdit(localItem, index);
+      handleEdit(localItem, item.id); // Use item.id for updates
     }
     setIsItemEditing(!isItemEditing);
   };
@@ -106,7 +107,7 @@ const NavItem = ({ item, index, moveItem, handleEdit, isEditing, level }) => {
             variant="standard"
             size="small"
             style={{ marginRight: 8, flexGrow: 1 }}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()} // Prevents click from bubbling
           />
         ) : (
           <ListItemText
@@ -153,11 +154,11 @@ const NavItem = ({ item, index, moveItem, handleEdit, isEditing, level }) => {
           unmountOnExit
         >
           <div>
-            {item?.children?.map((child, childIndex) => (
+            {item?.children?.map((child) => (
               <NavItem
-                key={child?.id}
+                key={child?.id} // Ensure each child has a unique key
                 item={child}
-                index={childIndex}
+                index={child.index} // Ensure child.index is correctly passed
                 moveItem={moveItem}
                 handleEdit={handleEdit}
                 isEditing={isEditing}
