@@ -100,24 +100,25 @@ const HomePage = () => {
             </Box>
           )}
 
-          {/* Settings Section */}
-          <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="flex-end"
-            padding="10px"
-            sx={{
-              backgroundColor: "white",
-              boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-            }}
-          >
-            <IconButton
-              onClick={handleToggleEditMode}
-              sx={{ color: "black" }}
+          {!isMobile && (
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="flex-end"
+              padding="10px"
+              sx={{
+                backgroundColor: "white",
+                boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+              }}
             >
-              <SettingsIcon />
-            </IconButton>
-          </Box>
+              <IconButton
+                onClick={handleToggleEditMode}
+                sx={{ color: "black" }}
+              >
+                <SettingsIcon />
+              </IconButton>
+            </Box>
+          )}
 
           <Box
             display="flex"
@@ -153,7 +154,7 @@ const HomePage = () => {
                 items={navItems}
                 moveItem={moveItem}
                 handleEdit={handleEdit}
-                isEditing={isEditing} // Pass edit mode state to MobileNav
+                isEditing={isEditing}
               />
             )}
           </Box>
