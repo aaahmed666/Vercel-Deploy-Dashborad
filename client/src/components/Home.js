@@ -8,6 +8,7 @@ import {
   IconButton,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import SettingsIcon from "@mui/icons-material/Settings";
 import Nav from "../components/Nav";
 import MobileNav from "../components/MobileNav";
 import { DndProvider } from "react-dnd";
@@ -19,6 +20,7 @@ import { fetchNavItems, trackReorder, saveNavItems } from "../utils/api";
 const HomePage = () => {
   const [navItems, setNavItems] = useState([]);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false); // State for edit mode
   const isMobile = useMediaQuery("(max-width:768px)");
 
   useEffect(() => {
@@ -48,6 +50,10 @@ const HomePage = () => {
     saveNavItems(updatedItems).catch((error) =>
       console.error("Error saving navigation data:", error)
     );
+  };
+
+  const handleToggleEditMode = () => {
+    setIsEditing(!isEditing); // Toggle edit mode
   };
 
   return (
@@ -94,6 +100,25 @@ const HomePage = () => {
             </Box>
           )}
 
+          {/* Settings Section */}
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="flex-end"
+            padding="10px"
+            sx={{
+              backgroundColor: "white",
+              boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+            }}
+          >
+            <IconButton
+              onClick={handleToggleEditMode}
+              sx={{ color: "black" }}
+            >
+              <SettingsIcon />
+            </IconButton>
+          </Box>
+
           <Box
             display="flex"
             flex={1}
@@ -112,6 +137,7 @@ const HomePage = () => {
                   items={navItems}
                   moveItem={moveItem}
                   handleEdit={handleEdit}
+                  isEditing={isEditing}
                 />
               </Box>
             )}
@@ -127,6 +153,7 @@ const HomePage = () => {
                 items={navItems}
                 moveItem={moveItem}
                 handleEdit={handleEdit}
+                isEditing={isEditing} // Pass edit mode state to MobileNav
               />
             )}
           </Box>

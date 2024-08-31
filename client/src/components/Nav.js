@@ -1,22 +1,20 @@
-"use client";
-
 import React from "react";
-import { List } from "@mui/material";
 import NavItem from "./NavItem";
 
-const Nav = ({ items, moveItem, handleEdit }) => {
+const Nav = ({ items, moveItem, handleEdit, isEditing }) => {
   return (
-    <List>
-      {items?.map((item, index) => (
+    <div>
+      {items.map((item, index) => (
         <NavItem
-          key={item?.id}
+          key={item.id}
           item={item}
           index={index}
           moveItem={moveItem}
           handleEdit={handleEdit}
+          isEditing={isEditing}
         />
       ))}
-    </List>
+    </div>
   );
 };
 
